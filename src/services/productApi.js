@@ -1,15 +1,11 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:8088",
-});
+const PRODUCT_API_BASE_URL = "http://localhost:8088/products";
 
-export const getProducts = async () => {
-  const res = await api.get("/products");
-  return res.data;
+export const getAllProducts = () => {
+  return axios.get(PRODUCT_API_BASE_URL);
 };
 
-export const createProduct = async (product) => {
-  const res = await api.post("/products", product);
-  return res.data;
+export const createProduct = (product) => {
+  return axios.post(PRODUCT_API_BASE_URL, product);
 };
