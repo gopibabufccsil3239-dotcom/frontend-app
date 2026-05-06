@@ -1,18 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllProducts, createProduct } from "../../services/ProductApi";
+import { getProducts } from "../../services/ProductApi";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = await getAllProducts();
-    return response.data;
-  }
-);
-
-export const addProduct = createAsyncThunk(
-  "products/addProduct",
-  async (product) => {
-    const response = await createProduct(product);
+    const response = await getProducts();
     return response.data;
   }
 );
@@ -20,12 +12,11 @@ export const addProduct = createAsyncThunk(
 const productSlice = createSlice({
   name: "products",
   initialState: {
-    items: [],
+    products: [],
     loading: false,
     error: null,
   },
   reducers: {},
-
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -34,14 +25,11 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload;
+        state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
-      .addCase(addProduct.fulfilled, (state, action) => {
-        state.items.push(action.payload);
       });
   },
 });

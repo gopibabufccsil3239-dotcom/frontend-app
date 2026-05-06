@@ -1,17 +1,19 @@
-import { Link } from "react-router-dom";
-import AppRoutes from "./routes/AppRoutes";
+import { Routes, Route, Link } from "react-router-dom";
+import ProductListPage from "./pages/ProductListPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
     <div>
-      <h1>Enterprise Product UI</h1>
-
       <nav>
-        <Link to="/">Product List</Link>
-        <Link to="/products/add">Add Product</Link>
+        <Link to="/">Products</Link> |{" "}
+        <Link to="/cart">Cart</Link>
       </nav>
 
-      <AppRoutes />
+      <Routes>
+        <Route path="/" element={<ProductListPage />} />
+        <Route path="/cart" element={<CartPage />} />
+      </Routes>
     </div>
   );
 }

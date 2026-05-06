@@ -1,0 +1,13 @@
+import axios from "axios";
+
+const CART_BASE_URL = "http://localhost:8082/cart";
+
+export const addToCartApi = (cartData) => {
+  return axios.post(
+    `${CART_BASE_URL}/add?userId=${cartData.userId}&productId=${cartData.productId}&quantity=${cartData.quantity}`
+  );
+};
+
+export const getCartItemsApi = (userId) => {
+  return axios.get(`${CART_BASE_URL}/${userId}`);
+};
